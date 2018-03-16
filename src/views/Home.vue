@@ -3,14 +3,16 @@
   in the project root's index.html file with the <div id="app"> tag. The Firebase
   instance exists only within this component.
 -->
-
 <template>
   <div id="app">
-    <img src="./assets/logo.png" height="150px">
+    <img src="../assets/logo.png" height="150px">
     <!-- Adding a new greeting; pretty much straight from the documentation! -->
     <form id="form" v-on:submit.prevent="addGreeting">
-      <input type="text" v-model="newGreeting.lang" placeholder="Language Name">
-      <input type="text" v-model="newGreeting.text" placeholder="How do you say hello?">
+      <input type="text" v-model="newProject.projectContact" placeholder="Add your contact information">
+      <input type="text" v-model="newProject.projectDetails" placeholder="Add details about the project">
+      <input type="text" v-model="newProject.projectLeader" placeholder="Add your name">
+      <input type="text" v-model="newProject.projectLink" placeholder="Add a link to the project">
+      <input type="text" v-model="newProject.projectName" placeholder="Add the project name">
       <input type="submit" value="Add Greeting">
     </form>
     <!--
@@ -18,12 +20,12 @@
       different languages. To do this, we use the "v-for" directive. This
       is linked to our demo Firebase instance, which is described below.
     -->
-    <h1 v-for="greeting in greetings">{{ greeting.text }}</h1>
+    <h1 v-for="project in projects">{{ project.text }}</h1>
   </div>
 </template>
 
 <script>
-  import Hello from './components/Hello'
+  import Hello from '../components/Hello'
 
   // This line is new!
   import Firebase from 'firebase'
@@ -34,20 +36,20 @@
    */
 
   let config = {
-    apiKey: "AIzaSyBliLgMQpiahmZl0OWdCZhT1mHOaJ0FBCE",
-    authDomain: "project-tracker-th.firebaseapp.com",
-    databaseURL: "https://project-tracker-th.firebaseio.com",
-    projectId: "project-tracker-th",
-    storageBucket: "project-tracker-th.appspot.com",
-    messagingSenderId: "997645017628"
-  };
+    apiKey: 'AIzaSyBliLgMQpiahmZl0OWdCZhT1mHOaJ0FBCE',
+    authDomain: 'project-tracker-th.firebaseapp.com',
+    databaseURL: 'https://project-tracker-th.firebaseio.com',
+    projectId: 'project-tracker-th',
+    storageBucket: 'project-tracker-th.appspot.com',
+    messagingSenderId: '997645017628'
+  }
 
   // Here we are initializing the Firebase connection.
   let app = Firebase.initializeApp(config)
   let db = app.database()
 
   // Accessing the greetings reference; .ref() takes a URL as its parameter.
-  let greetingsRef = db.ref('project')
+  let projectsRef = db.ref('project')
 
   export default {
     name: 'app',
@@ -61,14 +63,17 @@
      */
 
     firebase: {
-      greetings: greetingsRef.limitToLast(5)
+      projects: projectsRef.limitToLast(5)
     },
 
     data () {
       return {
-        newGreeting: {
-          lang: '',
-          text: ''
+        newProject: {
+          projectContact: '',
+          projectDetails: '',
+          projectLeader: '',
+          projectLink: '',
+          projectName: ''
         }
       }
     },
@@ -76,9 +81,12 @@
     // We have added a simple method to add new greetings to our Firebase.
     methods: {
       addGreeting: function () {
-        greetingsRef.push(this.newGreeting)
-        this.newGreeting.lang = ''
-        this.newGreeting.text = ''
+        projectsRef.push(this.newProject)
+        this.newProject.projectContact = ''
+        this.newProject.projectDetails = ''
+        this.newProject.projectLeader = ''
+        this.newProject.projectLink = ''
+        this.newProject.projectName = ''
       }
     },
 
