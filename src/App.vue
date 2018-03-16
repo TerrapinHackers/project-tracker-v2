@@ -34,19 +34,20 @@
    */
 
   let config = {
-    apiKey: 'AIzaSyB3B6_lHNK5JXKNa8SIskj71aha6I9ZekA',
-    authDomain: 'vuefire-quickstart-demo.firebaseapp.com',
-    databaseURL: 'https://vuefire-quickstart-demo.firebaseio.com',
-    storageBucket: 'vuefire-quickstart-demo.appspot.com',
-    messagingSenderId: '248222879987'
-  }
+    apiKey: "AIzaSyBliLgMQpiahmZl0OWdCZhT1mHOaJ0FBCE",
+    authDomain: "project-tracker-th.firebaseapp.com",
+    databaseURL: "https://project-tracker-th.firebaseio.com",
+    projectId: "project-tracker-th",
+    storageBucket: "project-tracker-th.appspot.com",
+    messagingSenderId: "997645017628"
+  };
 
   // Here we are initializing the Firebase connection.
   let app = Firebase.initializeApp(config)
   let db = app.database()
 
   // Accessing the greetings reference; .ref() takes a URL as its parameter.
-  let greetingsRef = db.ref('greetings')
+  let greetingsRef = db.ref('project')
 
   export default {
     name: 'app',
