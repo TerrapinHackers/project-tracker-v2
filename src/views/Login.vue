@@ -33,7 +33,7 @@
       <div class="row login-row">
         <div class="col-md-4 offset-md-4">
           <h1>Login</h1>
-          <form class="login-form">
+          <form class="login-form" v-on:submit.prevent="SignUp"> 
             <div class="form-group">
               <label for="input-email" class="bmd-label-floating">Email address</label>
               <input type="email" class="form-control" id="input-email" v-model="user.Username">
@@ -73,11 +73,9 @@
   }
 
   // Here we are initializing the Firebase connection.
-  let app = Firebase.initializeApp(config)
-  let db = app.database()
-
+  Firebase.initializeApp(config)
+  // var provider = Firebase.auth.EmailAuthProvider()
   // Accessing the greetings reference; .ref() takes a URL as its parameter.
-  let projectsRef = db.ref('project')
 
   export default {
     name: 'app',
@@ -90,10 +88,6 @@
      * https://github.com/vuejs/vuefire/
      */
 
-    firebase: {
-      projects: projectsRef.limitToLast(5)
-    },
-
     data () {
       return {
         user: {
@@ -105,13 +99,23 @@
 
     // We have added a simple method to add new greetings to our Firebase.
     methods: {
-      addGreeting: function () {
-        projectsRef.push(this.newProject)
-        this.newProject.projectContact = ''
-        this.newProject.projectDetails = ''
-        this.newProject.projectLeader = ''
-        this.newProject.projectLink = ''
-        this.newProject.projectName = ''
+      Login: function (event) {
+        const email = this.user.Username
+        const pass = this.user.Password
+        const auth = Firebase.auth()
+        const promise = auth.signINWithEmailAndPassword(email, pass)
+        this.user.Username = ''
+        this.user.Passwrod = ''
+        promise.catch(event => console.log(event.message))
+      },
+      SignUp: function (event) {
+        const email = this.user.Username
+        const pass = this.user.Password
+        const auth = Firebase.auth()
+        const promise = auth.createUserWithEmailAndPassword(email, pass)
+        this.user.Username = ''
+        this.user.Passwrod = ''
+        promise.catch(event => console.log(event.message))
       }
     },
 
