@@ -4,23 +4,12 @@
   instance exists only within this component.
 -->
 <template>
-  <div id="app">
-    <img src="../assets/logo.png" height="150px">
-    <!-- Adding a new greeting; pretty much straight from the documentation! -->
-    <form id="form" v-on:submit.prevent="addGreeting">
-      <input type="text" v-model="newProject.projectContact" placeholder="Add your contact information">
-      <input type="text" v-model="newProject.projectDetails" placeholder="Add details about the project">
-      <input type="text" v-model="newProject.projectLeader" placeholder="Add your name">
-      <input type="text" v-model="newProject.projectLink" placeholder="Add a link to the project">
-      <input type="text" v-model="newProject.projectName" placeholder="Add the project name">
-      <input type="submit" value="Add Greeting">
-    </form>
-    <!--
-      Here we are iterating through a very simply array of greetings in
-      different languages. To do this, we use the "v-for" directive. This
-      is linked to our demo Firebase instance, which is described below.
-    -->
-    <h1 v-for="project in projects">{{ project.text }}</h1>
+  <div id="app" class = "container">
+    <div class = "row">
+      <div class = "co-md-12">
+        <p>This is a test</p>
+      </div>
+    </div>
   </div>
 </template>
 

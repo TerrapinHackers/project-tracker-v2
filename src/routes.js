@@ -1,4 +1,6 @@
 export default {
   '/': 'Home',
-  '/login': 'Login'
+  '/login': 'Login',
+  '/dashboard': 'Dashboard',
+  '/newproject': 'NewProject'
 }
