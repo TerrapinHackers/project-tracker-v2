@@ -31,8 +31,8 @@
         </div>
     </nav>
 
-    <div class = "container" id = "ProjectsContainer" v-for="project in projects">
-        <div class = "row">
+    <div id = "ProjectsContainer" v-for="project in projects">
+        <div class = "row ProjectRow">
             <div class = "col-md-3">
                 <p> {{ project.projectName }} </p>
             </div>
@@ -155,5 +155,8 @@
     }
     #ProjectsContainer {
         margin-top: 20px;
+    }
+    .ProjectRow {
+        border-bottom: 2px solid black;
     }
 </style>

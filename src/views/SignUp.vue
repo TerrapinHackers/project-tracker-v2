@@ -33,7 +33,10 @@
       <div class="row login-row">
         <div class="col-md-4 offset-md-4">
           <h1>Login</h1>
-          <form class="login-form" v-on:submit.prevent="Login"> 
+          <form class="login-form" v-on:submit.prevent="SignUp"> 
+            <div class = "form-group">
+                <label for="input-name" class="bmd-label-floating">Full Name</label>
+                <input type="text" class="form-control" id="input-name" v-model="user.Name">
             <div class="form-group">
               <label for="input-email" class="bmd-label-floating">Email address</label>
               <input type="email" class="form-control" id="input-email" v-model="user.Username">
@@ -41,6 +44,10 @@
             <div class="form-group">
               <label for="input-password" class="bmd-label-floating">Password</label>
               <input type="password" class="form-control" id="input-password" v-model="user.Password">
+            </div>
+            <div class="form-group">
+                <label for="input-passwordConfirm" class+'bmd-label-floating'>Confirm Password</label>
+                <input type="password" class="form-control" id="input-passwordConfirm" v-model="user.PasswordConfirm">
             </div>
             <div class="form-group">
               <button id = "submit_button" type="submit" class="btn btn-primary btn-raised">Submit</button>
@@ -91,22 +98,32 @@
     data () {
       return {
         user: {
+          Name: '',
           Username: '',
-          Password: ''
+          Password: '',
+          PasswordConfirm: ''
         }
       }
     },
 
     // We have added a simple method to add new greetings to our Firebase.
     methods: {
-      Login: function (event) {
-        const email = this.user.Username
-        const pass = this.user.Password
-        const auth = Firebase.auth()
-        const promise = auth.signINWithEmailAndPassword(email, pass)
-        this.user.Username = ''
-        this.user.Passwrod = ''
-        promise.catch(event => console.log(event.message))
+      SignUp: function (event) {
+        const db = firebase.database()
+        if (this.user.Password == this.user.PasswordConfirm) {
+          const email = this.user.Username
+          const pass = this.user.Password
+          const auth = Firebase.auth()
+          const promise = auth.createUserWithEmailAndPassword(email, pass).then( function (newUser) {
+              db.ref('users/${newUser.uid}').set( { name: this.user.Name } )
+          })
+          th
+          this.user.Username = ''
+          this.user.Password = ''
+          
+          promise.catch(event => console.log(event.message))
+        }
+ 
       }
     },
 

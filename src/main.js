@@ -4,6 +4,7 @@
 import Vue from 'vue'
 import VueFire from 'vuefire'
 import routes from './routes'
+
 // import HomePage from './views/Home'
 
 /*
