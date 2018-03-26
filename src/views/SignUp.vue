@@ -32,11 +32,12 @@
     <div class="container"> 
       <div class="row login-row">
         <div class="col-md-4 offset-md-4">
-          <h1>Login</h1>
+          <h1>Sign Up</h1>
           <form class="login-form" v-on:submit.prevent="SignUp"> 
             <div class = "form-group">
                 <label for="input-name" class="bmd-label-floating">Full Name</label>
                 <input type="text" class="form-control" id="input-name" v-model="user.Name">
+            </div>
             <div class="form-group">
               <label for="input-email" class="bmd-label-floating">Email address</label>
               <input type="email" class="form-control" id="input-email" v-model="user.Username">
@@ -46,7 +47,7 @@
               <input type="password" class="form-control" id="input-password" v-model="user.Password">
             </div>
             <div class="form-group">
-                <label for="input-passwordConfirm" class+'bmd-label-floating'>Confirm Password</label>
+                <label for="input-passwordConfirm" class='bmd-label-floating'>Confirm Password</label>
                 <input type="password" class="form-control" id="input-passwordConfirm" v-model="user.PasswordConfirm">
             </div>
             <div class="form-group">
@@ -109,21 +110,22 @@
     // We have added a simple method to add new greetings to our Firebase.
     methods: {
       SignUp: function (event) {
-        const db = firebase.database()
-        if (this.user.Password == this.user.PasswordConfirm) {
+        const db = Firebase.database()
+        if (this.user.Password === this.user.PasswordConfirm) {
           const email = this.user.Username
           const pass = this.user.Password
           const auth = Firebase.auth()
-          const promise = auth.createUserWithEmailAndPassword(email, pass).then( function (newUser) {
-              db.ref('users/${newUser.uid}').set( { name: this.user.Name } )
+          const promise = auth.createUserWithEmailAndPassword(email, pass).then(function (newUser) {
+            db.ref('users/' + newUser.uid).set({ name: this.user.Name })
           })
-          th
+          this.user.Name = ''
           this.user.Username = ''
           this.user.Password = ''
-          
-          promise.catch(event => console.log(event.message))
+          this.user.PasswordConfirm = ''
+          promise.then(function () {
+            window.location.href = 'http://localhost:8080/Login'
+          }).catch(event => console.log(event.message))
         }
- 
       }
     },
 
@@ -140,7 +142,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
   .login-row {
     margin-top: 20px; 

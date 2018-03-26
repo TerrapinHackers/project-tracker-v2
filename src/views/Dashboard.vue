@@ -44,6 +44,14 @@
             </div>
         </div>
     </div>
+    <div id = "Buttons">
+        <div class = "row"> 
+            <div class = "col-md-12">
+                <button class = "btn btn-primary">Previous</button>
+                <button class = "btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Adding a new greeting; pretty much straight from the documentation! -->
     <!-- <form id="form" v-on:submit.prevent="addGreeting">

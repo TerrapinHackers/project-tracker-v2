@@ -51,10 +51,6 @@
      * https://github.com/vuejs/vuefire/
      */
 
-    firebase: {
-      projects: projectsRef.limitToLast(5)
-    },
-
     data () {
       return {
         newProject: {
