@@ -4,7 +4,7 @@
   instance exists only within this component.
 -->
 <template>
-  <div id="app">
+  <div id="login">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="http://terrapinhackers.com/"><img src="../assets/th-logo.svg"/></a>
       <a class="navbar-brand" href="#">Projects</a>
@@ -73,12 +73,14 @@
   }
 
   // Here we are initializing the Firebase connection.
-  Firebase.initializeApp(config)
+  if (!Firebase.apps.length) {
+    Firebase.initializeApp(config)
+  }
   // var provider = Firebase.auth.EmailAuthProvider()
   // Accessing the greetings reference; .ref() takes a URL as its parameter.
 
   export default {
-    name: 'app',
+    name: 'Login',
 
     /*
      * This section is added to the original CLI-generated App component. This
@@ -117,13 +119,12 @@
 </script>
 
 <style>
-  #app {
+  #login {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
   .login-row {
     margin-top: 20px; 

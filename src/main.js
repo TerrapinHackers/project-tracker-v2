@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
 import Vue from 'vue'
+import VueFire from 'vuefire'
 import router from './router'
 import App from './App'
 
@@ -14,6 +15,8 @@ import App from './App'
  */
   // const Home = { template: '<App/>', components: {  } }
 // const Login = { template: '<p>Login</p>' }
+
+Vue.use(VueFire)
 
 Vue.config.productionTip = false
 

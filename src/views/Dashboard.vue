@@ -4,7 +4,7 @@
   instance exists only within this component.
 -->
 <template>
-  <div id="app">
+  <div id="dashboard">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="http://terrapinhackers.com/"><img src="../assets/th-logo.svg"/></a>
         <a class="navbar-brand" href="#">Projects</a>
@@ -92,14 +92,16 @@
   }
 
   // Here we are initializing the Firebase connection.
-  let app = Firebase.initializeApp(config)
-  let db = app.database()
+  if (!Firebase.apps.length) {
+    Firebase.initializeApp(config)
+  }
+  let db = Firebase.database()
 
   // Accessing the greetings reference; .ref() takes a URL as its parameter.
   let projectsRef = db.ref('project')
 
   export default {
-    name: 'app',
+    name: 'Dashboard',
 
     /*
      * This section is added to the original CLI-generated App component. This
@@ -144,7 +146,7 @@
 </script>
 
 <style>
-    #app {
+    #dashboard {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
