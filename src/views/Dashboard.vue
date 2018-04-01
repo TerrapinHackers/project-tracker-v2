@@ -25,22 +25,25 @@
                     <a class="nav-link" href="reporting.html">Reporting</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" v-click="logOut()" href='#/login'>Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
-
     <div id = "ProjectsContainer" v-for="project in projects">
         <div class = "row ProjectRow">
             <div class = "col-md-3">
                 <p> {{ project.projectName }} </p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <p> {{ project.projectDetails }} </p>
             </div>
             <div class = "col-md-3">
-                <a href="#">More Details</a>
+                <p> {{ project.projectLeader }}
+                <p> {{ project.projectContact }} </p>
+            </div>
+            <div class = "col-md-3">
+                <a v-bind:href=project.projectLink>More Details</a>
             </div>
         </div>
     </div>
@@ -96,7 +99,7 @@
     Firebase.initializeApp(config)
   }
   let db = Firebase.database()
-
+  let auth = Firebase.auth()
   // Accessing the greetings reference; .ref() takes a URL as its parameter.
   let projectsRef = db.ref('project')
 
@@ -110,33 +113,41 @@
      *
      * https://github.com/vuejs/vuefire/
      */
-
     firebase: {
-      projects: projectsRef.limitToLast(5)
+      projects: {
+        source: projectsRef,
+        cancelCallback (err) {
+          console.error(err)
+        }
+      }
     },
-
     data () {
       return {
-        newProject: {
-          projectContact: '',
-          projectDetails: '',
-          projectLeader: '',
-          projectLink: '',
-          projectName: ''
-        }
+        user: null,
+        page: 1
       }
     },
 
     // We have added a simple method to add new greetings to our Firebase.
     methods: {
-      addGreeting: function () {
-        projectsRef.push(this.newProject)
-        this.newProject.projectContact = ''
-        this.newProject.projectDetails = ''
-        this.newProject.projectLeader = ''
-        this.newProject.projectLink = ''
-        this.newProject.projectName = ''
+      processUser: function (authed) {
+        console.log(authed)
+        if (authed === null) {
+          this.user = null
+          this.router.go('login')
+          return
+        }
+        this.user = {
+          title: authed.email || ''
+        }
+      },
+      logOut: function () {
+        auth.signOut()
       }
+    },
+
+    beforeMount () {
+      auth.onAuthStateChanged(this.processUser)
     },
 
     components: {

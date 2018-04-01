@@ -104,7 +104,7 @@
     Firebase.initializeApp(config)
   }
   let db = Firebase.database()
-
+  let auth = Firebase.auth()
   // Accessing the greetings reference; .ref() takes a URL as its parameter.
   let projectsRef = db.ref('project')
 
@@ -144,6 +144,20 @@
         this.newProject.projectLeader = ''
         this.newProject.projectLink = ''
         this.newProject.projectName = ''
+      },
+      processUser: function (authed) {
+        console.log(authed)
+        if (authed === null) {
+          this.user = null
+          this.router.go('login')
+          return
+        }
+        this.user = {
+          title: authed.email || ''
+        }
+      },
+      logOut: function () {
+        auth.signOut()
       }
     },
 

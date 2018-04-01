@@ -44,6 +44,7 @@
             </div>
             <div class="form-group">
               <button id = "submit_button" type="submit" class="btn btn-primary btn-raised">Submit</button>
+              <a href="#/signup" class = "btn btn-primary btn-raised">Sign Up</a>
             </div>
           </form>
         </div>
@@ -105,7 +106,7 @@
         const email = this.user.Username
         const pass = this.user.Password
         const auth = Firebase.auth()
-        const promise = auth.signINWithEmailAndPassword(email, pass)
+        const promise = auth.signInWithEmailAndPassword(email, pass)
         this.user.Username = ''
         this.user.Passwrod = ''
         promise.catch(event => console.log(event.message))
