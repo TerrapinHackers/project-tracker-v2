@@ -16,16 +16,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="#/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    <a class="nav-link" href="#/dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="reporting.html">Reporting</a>
+                    <a class="nav-link" href="#/newProject">Reporting</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" v-click="logOut()" href='#/login'>Logout</a>
                 </li>
             </ul>
         </div>
@@ -159,6 +159,10 @@
       logOut: function () {
         auth.signOut()
       }
+    },
+
+    beforeMount () {
+      auth.onAuthStateChanged(this.processUser)
     },
 
     components: {
