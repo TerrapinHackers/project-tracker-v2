@@ -131,7 +131,8 @@
           projectLeader: '',
           projectLink: '',
           projectName: ''
-        }
+        },
+        user: null
       }
     },
 
@@ -161,8 +162,9 @@
       }
     },
 
-    beforeMount () {
+    beforeCreate () {
       auth.onAuthStateChanged(this.processUser)
+      this.processUser(auth.currentUser)
     },
 
     components: {
