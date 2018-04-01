@@ -120,12 +120,8 @@
           const promise = auth.createUserWithEmailAndPassword(email, pass).then(function (newUser) {
             db.ref('users/' + newUser.uid).set({ name: this.user.Name })
           })
-          this.user.Name = ''
-          this.user.Username = ''
-          this.user.Password = ''
-          this.user.PasswordConfirm = ''
           promise.then(function () {
-            window.location.href = 'http://localhost:8080/Login'
+            this.$router.replace('login')
           }).catch(event => console.log(event.message))
         }
       }

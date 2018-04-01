@@ -65,13 +65,6 @@
     Firebase.initializeApp(config)
   }
   let db = Firebase.database()
-
-  Firebase.auth().onAuthStateChanged(function (user) {
-    if (!user) {
-      window.location.href = '#/login'
-      console.log(user)
-    }
-  })
   // Accessing the greetings reference; .ref() takes a URL as its parameter.
   let projectsRef = db.ref('project')
 

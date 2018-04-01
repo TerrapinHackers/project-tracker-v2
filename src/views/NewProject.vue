@@ -25,7 +25,7 @@
                     <a class="nav-link" href="#/newProject">Reporting</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" v-click="logOut()" href='#/login'>Logout</a>
+                    <a class="nav-link" v-on:click="logOut">Logout</a>
                 </li>
             </ul>
         </div>
@@ -146,25 +146,11 @@
         this.newProject.projectLink = ''
         this.newProject.projectName = ''
       },
-      processUser: function (authed) {
-        console.log(authed)
-        if (authed === null) {
-          this.user = null
-          this.router.go('login')
-          return
-        }
-        this.user = {
-          title: authed.email || ''
-        }
-      },
       logOut: function () {
-        auth.signOut()
+        auth.signOut().then(() => {
+          this.$router.replace('login')
+        })
       }
-    },
-
-    beforeCreate () {
-      auth.onAuthStateChanged(this.processUser)
-      this.processUser(auth.currentUser)
     },
 
     components: {

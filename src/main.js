@@ -5,6 +5,7 @@ import Vue from 'vue'
 import VueFire from 'vuefire'
 import router from './router'
 import App from './App'
+import firebase from 'firebase'
 
 // import HomePage from './views/Home'
 
@@ -17,16 +18,31 @@ import App from './App'
 // const Login = { template: '<p>Login</p>' }
 
 Vue.use(VueFire)
-
 Vue.config.productionTip = false
 
-  /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: { App }
+let app
+let config = {
+  apiKey: 'AIzaSyBliLgMQpiahmZl0OWdCZhT1mHOaJ0FBCE',
+  authDomain: 'project-tracker-th.firebaseapp.com',
+  databaseURL: 'https://project-tracker-th.firebaseio.com',
+  projectId: 'project-tracker-th',
+  storageBucket: 'project-tracker-th.appspot.com',
+  messagingSenderId: '997645017628'
+}
+if (!firebase.apps.length) {
+  firebase.initializeApp(config)
+}
+firebase.auth().onAuthStateChanged(function (user) {
+  if (!app) {
+    app = new Vue({
+      el: '#app',
+      router,
+      template: '<App/>',
+      components: { App }
+    })
+  }
 })
+  /* eslint-disable no-new */
 
 // window.addEventListener('popstate', () => {
 //   app.currentRoute = window.location.pathname

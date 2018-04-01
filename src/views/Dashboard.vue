@@ -25,7 +25,7 @@
                     <a class="nav-link" href="#/newProject">Reporting</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" v-click="logOut()" href='#/login'>Logout</a>
+                    <a class="nav-link" v-on:click="logout">Logout</a>
                 </li>
             </ul>
         </div>
@@ -130,25 +130,32 @@
 
     // We have added a simple method to add new greetings to our Firebase.
     methods: {
-      processUser: function (authed) {
-        console.log(authed)
-        if (authed === null) {
-          this.user = null
-          this.router.go('login')
-          return
-        }
-        this.user = {
-          title: authed.email || ''
-        }
-      },
-      logOut: function () {
+    //   processUser: function (authed) {
+    //     console.log(authed)
+    //     if (authed === null) {
+    //       this.user = null
+    //       this.$router.go('login')
+    //       return
+    //     }
+    //     this.user = {
+    //       title: authed.email || ''
+    //     }
+    //   },
+      logout: function () {
         auth.signOut()
+        this.$router.replace('login')
       }
     },
 
-    beforeMount () {
-      auth.onAuthStateChanged(this.processUser)
-    },
+    // beforeCreate () {
+    //   auth.onAuthStateChanged(function (user) {
+    //     if (user) {
+    //       this.user = user
+    //     } else {
+    //       this.router.replace('login')
+    //     }
+    //   }.bind(this))
+    // },
 
     components: {
       Hello

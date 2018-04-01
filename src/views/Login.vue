@@ -33,7 +33,7 @@
       <div class="row login-row">
         <div class="col-md-4 offset-md-4">
           <h1>Login</h1>
-          <form class="login-form" v-on:submit.prevent="Login"> 
+          <form class="login-form" v-on:submit.prevent="Login" id = "form"> 
             <div class="form-group">
               <label for="input-email" class="bmd-label-floating">Email address</label>
               <input type="email" class="form-control" id="input-email" v-model="user.Username">
@@ -103,13 +103,13 @@
     // We have added a simple method to add new greetings to our Firebase.
     methods: {
       Login: function (event) {
-        const email = this.user.Username
-        const pass = this.user.Password
         const auth = Firebase.auth()
-        const promise = auth.signInWithEmailAndPassword(email, pass)
-        this.user.Username = ''
-        this.user.Passwrod = ''
-        promise.catch(event => console.log(event.message))
+        auth.signInWithEmailAndPassword(this.user.Username, this.user.Password).then((user) => {
+          this.$router.replace('dashboard')
+        },
+        (error) => {
+          console.log('Error: ' + error.message)
+        })
       }
     },
 
