@@ -22,7 +22,7 @@
                     <a class="nav-link" href="#/dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#/newProject">Reporting</a>
+                    <a class="nav-link" href="#/newProject">New Project</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#/login">Login</a>
@@ -32,8 +32,13 @@
     </nav>
     <div class = "container">    
       <div class = "row">
-        <div class = "co-md-12">
-          <p>This is a test</p>
+        <div class = "col-md-12 text-center">
+          <h1 class = "maintitle">Terrapin Hackers Project Tracker</h1>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-md-12 text-center">
+          <p> Click login to begin using the app! </p>
         </div>
       </div>
     </div>

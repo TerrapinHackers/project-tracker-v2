@@ -43,7 +43,7 @@
               <input type="email" class="form-control" id="input-email" v-model="user.Username">
             </div>
             <div class="form-group">
-              <label for="input-password" class="bmd-label-floating">Password</label>
+              <label for="input-password" class="bmd-label-floating">Password (Must be at least 7 characters)</label>
               <input type="password" class="form-control" id="input-password" v-model="user.Password">
             </div>
             <div class="form-group">
