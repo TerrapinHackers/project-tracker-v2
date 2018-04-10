@@ -145,6 +145,8 @@
         this.newProject.projectLeader = ''
         this.newProject.projectLink = ''
         this.newProject.projectName = ''
+        this.$router.replace('dashboard')
+
       },
       logOut: function () {
         auth.signOut().then(() => {
