@@ -18,11 +18,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#/">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="#/dashboard">Dashboard</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#/newProject">Reporting</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#/newProject">New Project</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" v-on:click="logout">Logout</a>

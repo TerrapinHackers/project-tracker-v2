@@ -19,10 +19,10 @@
               <li class="nav-item">
                   <a class="nav-link" href="#/dashboard">Dashboard</a>
               </li>
-              <li class="nav-item active">
-                  <a class="nav-link" href="#/newProject">Reporting</a>
-              </li>
               <li class="nav-item">
+                  <a class="nav-link" href="#/newProject">New Project</a>
+              </li>
+              <li class="nav-item active">
                   <a class="nav-link" href="#/login">Login <span class="sr-only">(current)</span></a>
               </li>
           </ul>
